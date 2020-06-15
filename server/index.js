@@ -21,7 +21,7 @@ app.use(function(req,res,next){
     next();
 })
 
-const db = require('./config/key').mongoUrlShortenerURI
+const db = require('./config/keys').mongoGotBattles
 
 mongoose
   .connect(
@@ -37,5 +37,10 @@ app.use('/list', list)
 const count = require('./routes/count')
 app.use('/count', count)
 
-const search = requrie('./routes/search')
+const search = require('./routes/search')
 app.use('/search', search)
+
+const suggest = require('./routes/suggest')
+app.use('/suggest', suggest)
+
+app.listen(port, () => console.log(`Server up and running on port ${port} !`));

@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
         if(err){
             res.status(400).json(err)
         } else {
-            console.log(results)
+            res.status(200).json(results)
         }
     })
 })

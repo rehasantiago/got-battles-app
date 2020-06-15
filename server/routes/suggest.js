@@ -5,13 +5,13 @@ const battles = require('../connections/index')
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    battles.collection('battles').countDocuments({}, function(err, count){
+    const key = req.query.key;
+    battles.collection('battles').find({location: { $regex: '.*' + key + '.*'}},async function(err, cursor){
         if(err){
             res.status(400).json(err)
         } else {
-            res.status(200).json({
-                count
-            })
+            const results = await cursor.toArray()
+            return res.status(200).json(results);
         }
     })
 })
